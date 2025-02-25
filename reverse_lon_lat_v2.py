@@ -118,10 +118,15 @@ def append_address_type(coverage_db, address_tpye_df):
     coverage_db_summary.to_csv("coverage_db_summary.csv")
 
 def main():
-    rf_db=import_rf_db("RF_database_test.xlsx", "LTE")
+    #import database
+    rf_db_file_path="RF_database_test.xlsx"
+    rf_db_sheet_name="LTE"
+    rf_db=import_rf_db(rf_db_file_path, rf_db_sheet_name)
 
     #create coverage polygons
-    rf_db=create_coverage_polygons(rf_db.copy(deep=True), 70, 1.5)
+    coverage_width=70
+    coverage_radius=1.5
+    rf_db=create_coverage_polygons(rf_db.copy(deep=True), coverage_width, coverage_radius)
 
     #api query
     n_samples=10
